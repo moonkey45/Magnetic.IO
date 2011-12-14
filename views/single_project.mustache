@@ -3,13 +3,20 @@
 		<h1>{{title}}</h1>
 		<div class="row">
 			<div class="span11">
-				<img class="project-img-large" src="/img/demo.jpg"/>
+				<div style="padding-right: 40px;">
+					<div><img class="project-img-large" src="/img/demo.jpg"/></div>
+					<p class="oneliner">{{oneliner}}</p>
+					<p>{{description}}</p>
+					<div class="divider" style="margin: 20px 0;"></div>
+					<ul class="project-comments">
+						{{^comments}}
+							<li>No Comments Yet</li>
+						{{/comments}}
+					</ul>
+				</div>
 			</div>
 			<div class="span5">
-				<p class="oneliner">{{oneliner}}</p>
-				<p>{{description}}</p>
-				<div class="divider" style="margin: 20px 0 5px;"></div>
-				<h6>Desired Skills</h6>
+				<h6 style="line-height: 13px; margin-bottom: 1em;">Skills Needed</h6>
 				<ul class="project-tags">
 					{{#tags}}
 						<li>{{.}}</li>
@@ -19,39 +26,59 @@
 				<div class="divider" style="margin: 20px 0 5px;"></div>
 				<div>
 					<h6>Project Owner</h6>
-					{{#p_owner}}
+					{{#owner}}
 						{{>user}}
-					{{/p_owner}}
+					{{/owner}}
 				</div>
 				<div class="divider" style="margin: 20px 0 5px;"></div>
 				<div>
 					<h6>Collaborators</h6>
-					{{#p_collaborators}}
+					{{#collaborators}}
 						{{>user}}
-					{{/p_collaborators}}
-					{{^p_collaborators}}
-						None yet
-					{{/p_collaborators}}
+					{{/collaborators}}
+					{{^collaborators}}
+						<p>No collaborators yet.</p>
+					{{/collaborators}}
 				</div>
 				{{#user}}
-				<div class="divider" style="margin: 20px 0 30px;"></div>
-				<div><a id="join" href="/prohect/uri/join" class="btn big danger" data-controls-modal="join-modal" data-backdrop="static">Join This Project</a></div>
+				<div class="divider" style="margin: 20px 0 20px;"></div>
+				<div class="project-actions">
+					<a id="join" href="#" class="btn big danger" data-controls-modal="join-modal" data-backdrop="static">Join This Project</a>
+					<a id="recommend" href="#" class="btn big success" data-controls-modal="recommend-modal" data-backdrop="static">Recommend Someone I Know</a>
+				</div>
 				{{/user}}
+				<div class="divider" style="margin: 10px 0 20px;"></div>
+				{{>social}}
 			</div>
 		</div>
+		
 		<div id="join-modal" class="modal hide fade">
 			<div class="modal-header">
 		    	<a href="#" class="close">×</a>
 		    	<h3>Join {{title}}</h3>
 		    </div>
 		    <div class="modal-body">
-				<p>Send a message:</p>
+				<p>Send a message to {{#owner}}{{firstname}}{{/owner}}:</p>
 		    	<textarea style="width: 520px; height: 5em;"></textarea>
 		    </div>
 		    <div class="modal-footer">
 		        <a href="#" class="btn primary">Send</a>
 			</div>
 		</div>
+		
+		<div id="recommend-modal" class="modal hide fade">
+			<div class="modal-header">
+		    	<a href="#" class="close">×</a>
+		    	<h3>Recommend someone to {{#owner}}{{firstname}}{{/owner}}</h3>
+		    </div>
+		    <div class="modal-body">
+				<p><input type="text" placeholder="Search user"/></p>
+		    </div>
+		    <div class="modal-footer">
+		        <a href="#" class="btn primary">Recommend</a>
+			</div>
+		</div>
+		
 		<script>
 			$('#join-modal').modal({
 				keyboard: true,

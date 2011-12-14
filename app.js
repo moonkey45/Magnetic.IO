@@ -32,7 +32,13 @@ app.configure('production', function(){
 });
 
 // Routes
+
+//TODO: signup, account settings, delete/edit project, browse user/projects by tags, recommendations after creating project, comments on projects, documentation for projects
+//endorse/invite/recommend actions, follow user/projects
+
 app.get('/', routes.index);
+
+app.get('/about', routes.about)
 
 app.get('/login', routes.login);
 app.post('/login', routes.auth);
@@ -45,7 +51,9 @@ app.get('/post/:step?', routes.post);
 app.post('/post/done', routes.postDone);
 
 app.get('/explore', routes.explore);
-app.post('/search', routes.search);
+
+app.get('/search', routes.search)
+app.post('/search', routes.searchResult);
 
 app.get('/profile/:username?/:action?', routes.profileAction);
 app.get('/profile/:username?', routes.profile);
@@ -54,7 +62,7 @@ app.get('/profile', routes.profileSelf);
 app.get('/project/:name/:action?', routes.project);
 
 //API
-app.get('/api/tags/:tag', routes.searchTags)
+app.get('/api/tags/:tag', routes.suggestTags)
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

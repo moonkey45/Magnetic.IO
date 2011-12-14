@@ -32,8 +32,14 @@ var ProjectSchema = new Schema({
 	description: String,
 	oneliner: String,
 	link: String,
-	owner: String,
-	collaborators: [String],
+	owner: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	collaborators: [{
+		type: Schema.ObjectId,
+		ref: 'User'
+	}],
 	postedOn: {
 		type: Date,
 		default: Date.now

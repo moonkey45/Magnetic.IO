@@ -39,6 +39,18 @@ exports.index = function (req, res) {
 	});
 };
 
+exports.about = function (req, res) {
+	res.render('about', {
+		user: req.session.user
+	});
+}
+
+exports.search = function (req, res) {
+	res.render('search', {
+		user: req.session.user
+	});
+}
+
 //get /login
 exports.login = function (req, res) {
 	if (!req.session.user) {
@@ -238,22 +250,31 @@ exports.explore = function (req, res) {
 
 exports.project = function (req, res) {
 	var uri = req.params.name;
-	db.Project.findOne({ uri: uri }, function (err, project) {
-		db.User.findOne({ username: project.owner }, ['firstname','lastname','username','email_hash'], function (err, owner) {
-			db.User.where('username').select('firstname','lastname','username','email_hash').in(project.collaborators).run(function (err, collaborators) {
-				res.render('single_project', {
-					project: project,
-					user: req.session.user,
-					p_owner: owner,
-					p_collaborators: collaborators
-				});
+	db.Project
+		.findOne({uri: uri})
+		.populate('owner', ['firstname','lastname','username','email_hash'])
+		.populate('collaborators', ['firstname','lastname','username','email_hash'])
+		.run(function (err, project) {
+			console.log(project.owner);
+			res.render('single_project', {
+				project: project,
+				user: req.session.user
 			});
 		});
+}
+
+exports.search = function (req, res) {
+	res.render('search', {
+		user: req.session.user
 	});
 }
 
+exports.searchResult = function (req, res) {
+	
+}
+
 //API
-exports.searchTags = function (req, res) {
+exports.suggestTags = function (req, res) {
 	var term = req.params.tag;
 	res.contentType('json');
 	res.send({
