@@ -1,0 +1,62 @@
+<div class="main">
+	{{#project}}
+		<h1>{{title}}</h1>
+		<div class="row">
+			<div class="span11">
+				<img class="project-img-large" src="/img/demo.jpg"/>
+			</div>
+			<div class="span5">
+				<p class="oneliner">{{oneliner}}</p>
+				<p>{{description}}</p>
+				<div class="divider" style="margin: 20px 0 5px;"></div>
+				<h6>Desired Skills</h6>
+				<ul class="project-tags">
+					{{#tags}}
+						<li>{{.}}</li>
+					{{/tags}}
+				</ul>
+				<div style="clear: both;"></div>
+				<div class="divider" style="margin: 20px 0 5px;"></div>
+				<div>
+					<h6>Project Owner</h6>
+					{{#p_owner}}
+						{{>user}}
+					{{/p_owner}}
+				</div>
+				<div class="divider" style="margin: 20px 0 5px;"></div>
+				<div>
+					<h6>Collaborators</h6>
+					{{#p_collaborators}}
+						{{>user}}
+					{{/p_collaborators}}
+					{{^p_collaborators}}
+						None yet
+					{{/p_collaborators}}
+				</div>
+				{{#user}}
+				<div class="divider" style="margin: 20px 0 30px;"></div>
+				<div><a id="join" href="/prohect/uri/join" class="btn big danger" data-controls-modal="join-modal" data-backdrop="static">Join This Project</a></div>
+				{{/user}}
+			</div>
+		</div>
+		<div id="join-modal" class="modal hide fade">
+			<div class="modal-header">
+		    	<a href="#" class="close">×</a>
+		    	<h3>Join {{title}}</h3>
+		    </div>
+		    <div class="modal-body">
+				<p>Send a message:</p>
+		    	<textarea style="width: 520px; height: 5em;"></textarea>
+		    </div>
+		    <div class="modal-footer">
+		        <a href="#" class="btn primary">Send</a>
+			</div>
+		</div>
+		<script>
+			$('#join-modal').modal({
+				keyboard: true,
+				backdrop: true;
+			});
+		</script>
+	{{/project}}
+</div>

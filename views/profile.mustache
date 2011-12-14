@@ -1,0 +1,68 @@
+<div class="main">
+	
+	{{#target}}
+		<img class="avatar" src="http://www.gravatar.com/avatar/{{email_hash}}?s=75"/>
+		<div class="user-meta">
+			<h2>{{firstname}} {{lastname}} <span class="label {{#available}}success{{/available}} {{^available}}warning{{/available}}">{{#available}}Available{{/available}}{{^available}}Not Available{{/available}}</span></h2>
+			<p class="tagline">{{tagline}}</p>
+			<p class="sub-meta">{{location}} {{#url}}&nbsp;·&nbsp; <a href="{{url}}">{{url}}</a>{{/url}}</p>
+		</div>
+		<div class="section">
+			<h3>Areas of Specialization</h3>
+			<div class="divider"></div>
+			<ul class="tags">
+				{{#tags}}
+				  <li><a class="btn small primary">{{.}}</a></li>
+				{{/tags}}
+				{{^tags}}
+					{{#isOwner}}
+						<span style="color: gray">You have not specified any areas of specialization yet. <a href="/post">Add one now.</a></span>
+					{{/isOwner}}
+					{{^isOwner}}
+						{{firstname}} has not entered any skills yet.
+					{{/isOwner}}
+				{{/tags}}
+			</ul>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="section">
+			<h3>Open Projects</h3>
+			<div class="divider"></div>
+			<ul class="project-list">
+				{{#projectsOwned}}
+					{{>project}}
+				{{/projectsOwned}}
+				{{^projectsOwned}}
+					{{#isOwner}}
+						<li>You do not have any open projects. <a href="/post">Post one now.</a></li>
+					{{/isOwner}}
+					{{^isOwner}}
+						<li>{{firstname}} does not have any open projects.</li>
+					{{/isOwner}}
+				{{/projectsOwned}}
+			</ul>
+		</div>
+		<div class="section">
+			<h3>Involved Projects</h3>
+			<div class="divider"></div>
+			<ul class="project-list">
+				{{#projectsInvolved}}
+					do something
+				{{/projectsInvolved}}
+				{{^projectsInvolved}}
+					{{#isOwner}}
+						<li>You are not involved in any projects at the moment. <a href="/explore">Start exploring!</a></li>
+					{{/isOwner}}
+					{{^isOwner}}
+						<li>{{firstname}} is not involved in any projects at the moment.</li>
+					{{/isOwner}}
+				{{/projectsInvolved}}
+			</ul>
+		</div>
+	{{/target}}
+	
+	{{^target}}
+		<p>User not found</p>
+	{{/target}}
+	
+</div>

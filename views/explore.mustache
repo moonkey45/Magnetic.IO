@@ -1,0 +1,48 @@
+<div class="main">
+	<h1 style="float: left">Explore</h1>
+	<div style="float: right">
+		<form action="/search" method="post">
+			<input name="search" type="text" placeholder="Search Tags"/>
+			<input class="btn" type="submit" value="Go"/>
+		</form>
+	</div>
+	<div style="clear: both"></div>
+	<div style="margin-top: 10px;" class="section">
+		<h3>Featured Projects</h3>
+		<div class="divider"></div>
+		<ul class="project-list">
+			{{#featuredProjects}}
+				{{>project}}
+			{{/featuredProjects}}
+		</ul>
+	</div>
+	<div class="section">
+		<h3>Latest Projects</h3>
+		<div class="divider"></div>
+		<ul class="project-list">
+			{{#latestProjects}}
+				{{>project}}
+			{{/latestProjects}}
+		</ul>
+	</div>
+	<div class="section">
+		<h3>Popular Project Tags</h3>
+		<div class="divider"></div>
+		<ul class="tags">
+			{{#projectTags}}
+			  <li><a class="btn small info">{{name}} <span class="tag-count">{{countProjects}}</span></a></li>
+			{{/projectTags}}
+		</ul>
+		<div style="clear: both"></div>
+	</div>
+	<div class="section">
+		<h3>Popular User Tags</h3>
+		<div class="divider"></div>
+		<ul class="tags">
+			{{#userTags}}
+			  <li><a class="btn small success">{{name}} <span class="tag-count">{{countUsers}}</span></a></li>
+			{{/userTags}}
+		</ul>
+		<div style="clear: both"></div>
+	</div>
+</div>

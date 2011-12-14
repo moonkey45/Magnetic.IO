@@ -1,0 +1,66 @@
+<div class="main post">
+	<h3>Step 2 of 2</h3>
+	<h1>Project Information</h1>
+	<form id="form" method="post" action="/post/done" class="form-stacked">
+		<div class="clearfix">
+			<label for="project-title">Project Title</label>
+			<div class="input">
+				<input class="required" style="width: 470px;" type="text" name="title" maxlength="100" id="project-title"/>
+			</div>
+		</div>
+		<div class="clearfix">
+			<label for="project-onliner">Project One-liner</label>
+			<div class="input">
+				<input class="required" style="width: 470px;" type="text" name="oneliner" maxlength="100" id="project-oneliner"/>
+				<p class="caption">Sum up what your project is in one short sentence. (100 characters max)</p>
+			</div>
+		</div>
+		<div class="clearfix">
+			<label for="project-description">Project Description</label>
+			<div class="input">
+				<textarea class="required" style="width: 470px; height: 12em;" id="project-description" maxlength="750" name="description"></textarea>
+				<p class="caption">Describe what you are making in more details and estimate how much work is involved. What makes it creative? What will the collaborators get out of it? (750 characters max)</p>
+			</div>
+		</div>
+		<div class="clearfix">
+			<label for="project-link">External Link ( optional )</label>
+			<div class="input">
+				<input style="width: 470px;" type="text" name="link" id="project-link"/>
+				<p class="caption">Where can we learn more about your project? e.g. A video.</p>
+			</div>
+		</div>
+		<label>I'm looking for collaborators with the following skills:</label>
+		<ul id="tags" class="tagit">
+		</ul>
+		<p class="caption">Using suggested tags increases your project's chance of being discovered.</p>
+		<div class="clearfix" style="margin-top: 40px;">
+			<a class="btn" href="/post/guidelines">« Back</a>
+			<input class="btn primary" type="submit" value="Submit »" style="float:right;">
+		</div>
+	</form>
+	<script>
+		$('#tags').tagit({
+			itemName: 'user',
+			allowSpaces: true,
+			caseSensitive: false,
+			tagSource: function (search, showChoices) {
+				var filter = search.term.toLowerCase(),
+					tagit = this;
+				$.get('/api/tags/'+filter, function (data) {
+					showChoices(tagit._subtractArray(data.tags, tagit.assignedTags()));
+				});
+			}
+		});
+		$('#form').submit(function(e){
+			var valid = true;
+			$(this).find('input.required').each(function(){
+				if ($(this).val() == '') valid = false;
+			});
+			if ($('.tagit-choice').length < 1) valid = false;
+			if (!valid) {
+				e.preventDefault();
+				alert('Please fill in all required fields.');
+			}
+		});
+	</script>
+</div>

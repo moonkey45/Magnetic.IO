@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Magnetic.IO</title>
+	<meta name="google-site-verification" content="eWenVUbhJY2z8NDZlmO3_q-zrLFCDB5mDOBHLHdfuVA" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Magnetic.IO is a platform that helps you find the right collaborators for your next creative project.">
+	<link rel="icon" type="image/png" href="/favicon.png" />
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
+	<!--[if gte IE 9]>
+	  <style type="text/css">
+	    .project-tags, .tagit-choice {
+	       filter: none;
+	    }
+	  </style>
+	<![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/jquery.ui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap-dropdown.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+	
+		var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26054058-1']);
+        _gaq.push(['_setDomainName', 'magnetic.io']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+		$(function(){
+			$('#topbar').dropdown();
+		});
+		
+	</script>
+</head>
+<body>
+	<div id="topbar" class="topbar">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="/"><img src="/img/brand.png" alt="Magnetic.IO"/></a>
+				<ul class="nav">
+					<li><a href="/post">Post a Project</a></li>
+					<li><a href="/explore">Explore</a></li>
+				</ul>
+				<ul class="nav secondary-nav">
+					{{#user}}
+						<li class="dropdown" data-dropdown="dropdown">
+							<a style="cursor: pointer;" class="dropdown-toggle">
+								<img class="small-avatar" src="http://www.gravatar.com/avatar/{{email_hash}}?s=20"> {{firstname}}
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="/profile/{{username}}">Profile</a></li>
+								<li><a href="/profile/{{username}}/settings">Settings</a></li>
+								<li><a href="/logout">Sign out</a></li>
+							</ul>
+						</li>
+					{{/user}}
+					{{^user}}
+						<li><a href="/login">Login</a></li>
+						<li><a href="/signup" class="btn primary" style="padding: 4px 10px 3px; margin-top: 5px; margin-left: 15px;">Sign Up</a></li>
+					{{/user}}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		{{{yield}}}
+		<div class="divider" style="margin-top: 20px;"></div>
+		<footer>
+			<p>Copyright © 2011 Magnetic.IO. All projects and related assets © their respective owners.<span><a href="/about">About</a> · <a href="mailto:hello@magnetic.io">Contact</a></span></p>
+		</footer>
+	</div>
+</body>
+</html>
