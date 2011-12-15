@@ -139,7 +139,7 @@ exports.profile = function (req, res, next) {
 				if (err) console.log(err);
 				if (user) {
 
-					console.log(user);
+					//console.log(user);
 
 					var isOwner = false;
 					if (req.session.user)
@@ -193,7 +193,7 @@ exports.postDone = function (req, res) {
 			description: req.body.description,
 			link: req.body.link,
 			tags: tags,
-			owner: req.session.user.username,
+			owner: req.session.user._id,
 			uri: _s.trim(req.body.title.toLowerCase()).replace(' ','-')
 		});
 		
@@ -269,15 +269,42 @@ exports.search = function (req, res) {
 	});
 }
 
+//for translating input to Models
+var searchTypes = {
+	Projects: 'Project',
+	People: 'User'
+};
+
 exports.searchResult = function (req, res) {
-	
+	var keyword = req.body.keyword,
+		type = searchTypes[req.body.type];
+	db[type].where('tags').in([keyword]).run(function (err, docs) {
+		var data = {
+			user: req.session.user,
+			keyword: keyword,
+			empty: docs.length == 0,
+			type: req.body.type
+		};
+		data[type] = docs;
+		res.render('search', data);
+	});
 }
 
 //API
 exports.suggestTags = function (req, res) {
 	var term = req.params.tag;
-	res.contentType('json');
-	res.send({
-		tags: ["ttt", "testest", "1213f", term]
+	db.Tag
+	.where('name')
+	.regex(new RegExp(term))
+	.limit(5)
+	.run(function (err, tags) {
+		var plainTags = [];
+		_.each(tags, function (tag) {
+			plainTags.push(tag.name);
+		});
+		res.contentType('json');
+		res.send({
+			tags: plainTags
+		});
 	});
 }

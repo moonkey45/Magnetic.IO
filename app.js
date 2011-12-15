@@ -35,6 +35,7 @@ app.configure('production', function(){
 
 //TODO: signup, account settings, delete/edit project, browse user/projects by tags, recommendations after creating project, comments on projects, documentation for projects
 //endorse/invite/recommend actions, follow user/projects
+//Events, meetups, calendars?
 
 app.get('/', routes.index);
 

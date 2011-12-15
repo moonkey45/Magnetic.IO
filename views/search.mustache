@@ -1,3 +1,31 @@
 <div class="main">
 	<h1>Search</h1>
+	<form method="post">
+		<div class="clearfix" style="margin-top: 30px; font-size: 14px; color: #aaa; font-weight: bold;">
+			Search for <input style="margin: 0 10px;" type="text" name="keyword" placeholder="tag"/> in
+			<select name="type" style="width: 100px; margin: 0 10px;">
+				<option>Projects</option>
+				<option>People</option>
+			</select>
+			<input type="submit" value="Go" class="btn primary">
+		</div>
+	</form>
+	{{^empty}}
+	{{#keyword}}
+		<div class="divider" style="margin: 20px 0;"></div>
+		<h4>Search result for '{{keyword}}' in {{type}}:</h4>
+	{{/keyword}}
+	{{/empty}}
+	{{#empty}}
+		<div class="divider" style="margin: 20px 0;"></div>
+		<h4>No results found for keyword: {{keyword}}</h4>
+	{{/empty}}
+	<ul class="project-list">
+		{{#Project}}
+		<li>{{>project}}</li>
+		{{/Project}}
+		{{#User}}
+			<li>{{>user}}</li>
+		{{/User}}
+	</ul>
 </div>
