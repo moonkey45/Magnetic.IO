@@ -50,18 +50,21 @@ var ProjectSchema = new Schema({
 var UserSchema = new Schema({
 	username: {
 		type: String,
-		validate: /[a-z0-9]/,
-		unique: true
+		unique: true,
+		validate: [
+			function (v) {
+				console.log(v);
+				return /[a-zA-Z0-9]*/.test(v);
+			},
+			'Username must contain only alphabets and numbers.'
+		]
 	},
 	firstname : String,
 	lastname: String,
 	tagline: String,
 	location: String,
 	url: String,
-	available: {
-		type: Boolean,
-		default: true
-	},
+	available: Boolean,
 	email : {
 		type: String,
 		unique: true

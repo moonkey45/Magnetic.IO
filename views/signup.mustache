@@ -1,29 +1,55 @@
-<div id="signup" class="main" style="width: 600px; margin: 0px auto;">
+<div id="signup" class="main span6" style="margin: 0px auto;">
 	<h1>Sign Up</h1>
 	<div style="margin-bottom: 30px" class="divider"></div>
-	<form method="post">
-			<div class="clearfix">
-				<label for="firstname">First Name</label>
-				<div class="input"><input class="span3" type="text" id="fisrtname" name="firstname"/></div>
+	<form method="post" class="form-stacked">
+		<div class="clearfix">
+			<label>Username</label>
+			<div class="input">
+				<input class="span3" type="text" id="username" name="username"/>
 			</div>
-			<div class="clearfix">
-				<label for="lastname">Last Name</label>
-				<div class="input"><input class="span3" type="text" id="lastname" name="lastname"/></div>
+			<p class="caption">http://magnetic.io/profile/<span id="url" style="font-weight: bold;">your-username</span></p>
+		</div>
+		<div class="clearfix">
+			<label>Email</label>
+			<div class="input"><input class="span6" type="text" name="email"/></div>
+		</div>
+		<div class="clearfix">
+			<label>Password</label>
+			<div class="input">
+				<input class="span3" type="password" name="password" style="margin-right: 15px;"/>
+				<input class="span3" type="password" name="password_confirm" placeholder="Confirm"/>
 			</div>
-			<div class="clearfix">
-				<label for="email">Email</label>
-				<div class="input"><input class="span5" type="text" id="email" name="email"/></div>
+		</div>
+		<div class="divider" style="margin: 30px 0 10px;"></div>
+		<div class="clearfix">
+			<label>Name</label>
+			<div class="input">
+				<input class="span3" type="text" name="firstname" placeholder="First" style="margin-right: 15px;"/>
+				<input class="span3" type="text" name="lastname" placeholder="Last"/>
 			</div>
-			<div class="clearfix">
-				<label for="password">Password</label>
-				<div class="input"><input class="span3" type="password" id="password" name="password"/></div>
+			<p class="caption">You'll want to know your collaborator's name, don't you?</p>
+		</div>
+		<div class="clearfix">
+			<label>Location</label>
+			<div class="input"><input class="span6" type="text" name="location"/></div>
+			<p class="caption">So that you can find local collaborators!</p>
+		</div>
+		<div class="clearfix">
+			<label>Short Bio</label>
+			<div class="input">
+				<textarea class="span6" name="bio" maxlength="140" style="height: 4em;"></textarea>
 			</div>
-			<div class="clearfix">
-				<label for="confirm">Confirm Passworkd</label>
-				<div class="input"><input class="span3" type="password" id="confirm" name="confirm"/></div>
+			<p class="caption">About yourself in 140 characters.</p>
+		</div>
+		<div class="clearfix">
+			<div class="input">
+				<input class="btn" type="submit" value="Sbumit »"/>
 			</div>
-			<div class="clearfix">
-				<div class="input"><input class="btn" type="submit" value="Sign Up »"/></div>
-			</div>
+		</div>
 	</form>
 </div>
+<script>
+	$('#username').keyup(function(){
+		$('#url').html($(this).val() || 'your-username');
+	});
+</script>

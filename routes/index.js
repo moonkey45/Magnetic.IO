@@ -104,7 +104,11 @@ exports.signup = function (req, res) {
 
 //post /signup
 exports.createUser = function(req, res) {
-	res.send('1');
+	var newUser = new db.User({
+		username: req.body.username
+	}).save(function (err) {
+		console.log(err); //TODO fix this duplicate key error
+	});
 }
 
 //get /logout
@@ -255,7 +259,6 @@ exports.project = function (req, res) {
 		.populate('owner', ['firstname','lastname','username','email_hash'])
 		.populate('collaborators', ['firstname','lastname','username','email_hash'])
 		.run(function (err, project) {
-			console.log(project.owner);
 			res.render('single_project', {
 				project: project,
 				user: req.session.user

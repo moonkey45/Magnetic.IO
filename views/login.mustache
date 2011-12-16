@@ -12,8 +12,19 @@
 	<form method="post">
 		<p><input class="span5" type="text" name="email" placeholder="email"/></p>
 		<p><input class="span5" type="password" name="password" placeholder="password"></p>
-		<p style="margin: 0 0 5px;"><label style="float: none;"><input type="checkbox" name="remember"/> Remember Me</label></p>
-		<p><input class="btn" type="submit" value="Login »"/> <span style="margin: 0 10px">or</span> <a href="/signup">Sign Up</a></p>
+		<p style="margin: 0 0 5px;">
+			<label style="float: none; color: #999; cursor:pointer; font-size: 12px;">
+				<input type="checkbox" name="remember" style="margin-right: 5px;"/>
+				Remember Me
+			</label>
+		</p>
+		<p>
+			<input class="btn" type="submit" value="Login »"/>
+			<span style="margin: 0 10px">or</span>
+			<a href="/signup">
+				Sign Up
+			</a>
+		</p>
 		<p style="margin:0;"><a style="font-size: 11px; color: #999;" href="/recovery">Forgot Password</a></p>
 		{{#postRedirect}}
 			<input type="hidden" name="postRedirect" value="on"/>

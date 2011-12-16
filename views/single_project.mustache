@@ -40,13 +40,16 @@
 						<p>No collaborators yet.</p>
 					{{/collaborators}}
 				</div>
-				{{#user}}
 				<div class="divider" style="margin: 20px 0 20px;"></div>
 				<div class="project-actions">
+				{{#user}}
 					<a id="join" href="#" class="btn big danger" data-controls-modal="join-modal" data-backdrop="static">Join This Project</a>
 					<a id="recommend" href="#" class="btn big success" data-controls-modal="recommend-modal" data-backdrop="static">Recommend Someone I Know</a>
-				</div>
 				{{/user}}
+				{{^user}}
+					<a href="/signup" class="btn primary" style="margin-right: 10px;">Sign Up</a> to join this project.
+				{{/user}}
+				</div>
 				<div class="divider" style="margin: 10px 0 20px;"></div>
 				{{>social}}
 			</div>
